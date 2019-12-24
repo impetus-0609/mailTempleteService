@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>入力画面</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<form method="post" action="/mail/confirm" th:object="${mailModel}">
+			<!--<div>
+				<select th:field="*{templeteCd}">
+					<option th:each="templete : ${T(com.mlweb.data.MailTemplate)}"
+						th:value="${templete.getValue()}"
+						th:text="${templete.getText()}">未着手</option>
+                </select>
+			</div>-->
+			<div>
+				<table>
+					<tr>
+						<td><p>From</p></td>
+						<td><input type="text" th:field="*{fromAd}"></input></td>
+					</tr>
+					<tr>
+						<td><p>To</p></td>
+						<td><input type="text" th:field="*{toAd}"></input></td>
+					</tr>
+					<tr>
+						<td>CC</td>
+						<td><input type="text" th:field="*{ccAd}"></input></td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<table>
+					<tr>
+						<td><p>Title</p></td>
+						<td><input type="text" th:field="*{title}"></input></td>
+					</tr>
+					<tr>
+						<td><p>Text</p></td>
+						<td><input type="text" th:field="*{content}"></input></td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<input type="submit" value="送信内容の確認" />
+			</div>
+		</form>
+	</body>
+</html>
