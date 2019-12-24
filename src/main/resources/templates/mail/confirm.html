@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>確認画面</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<div>
+			<table>
+				<tr>
+					<td><p>From</p></td>
+					<td><p th:text="${mailModel.fromAd}"></p></td>
+				</tr>
+				<tr>
+					<td><p>To</p></td>
+					<td><p th:text="${mailModel.toAd}"></p></td>
+				</tr>
+				<tr>
+					<td>CC</td>
+					<td><p th:text="${mailModel.ccAd}"></p></td>
+				</tr>
+				<tr>
+					<td>Title</td>
+					<td><p th:text="${mailModel.title}"></p></td>
+				</tr>
+				<tr>
+					<td>Title</td>
+					<td><p th:text="${mailModel.content}"></p></td>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<form method="post" action="/mail/complete" th:object="${mailModel}">
+				<input type="submit" value="確認した内容でメールを送信する" />
+			</form>
+			<form method="post" action="/mail/input" th:object="${mailModel}">
+				<input type="hidden" th:field="*{fromAd}"/>
+				<input type="hidden" th:field="*{toAd}"/>
+				<input type="hidden" th:field="*{ccAd}"/>
+				<input type="hidden" th:field="*{title}"/>
+				<input type="hidden" th:field="*{content}"/>
+				<input type="submit" value="入力画面に戻る" />
+			</form>
+		</div>
+	</body>
+</html>
