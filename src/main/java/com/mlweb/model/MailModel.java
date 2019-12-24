@@ -1,5 +1,7 @@
 package com.mlweb.model;
 
+import java.util.Properties;
+
 import com.mlweb.data.MailTemplate;
 
 import lombok.Builder;
@@ -20,4 +22,6 @@ public class MailModel {
 	private String title;
 
 	private String content;
+
+	Properties props;
 }

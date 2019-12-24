@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mlweb.form.MailInputForm;
 import com.mlweb.model.MailModel;
+import com.mlweb.service.MailSenderService;
 
 @Controller
 @RequestMapping("/mail")
@@ -18,9 +19,14 @@ public class MailInputController {
 	@Autowired
 	MailInputHelper mailInputHelper;
 
+	@Autowired
+	MailSenderService mailSenderService;
+
 	@RequestMapping("/input")
 	public ModelAndView input(MailInputForm form, ModelAndView mv) {
 		MailModel mailModel = mailInputHelper.mailModelMapper(form);
+		// FIXME そのうち入力チェック実装する
+		// FIXME FROMアドレスはリクエストから取得してはいけない。
 		mv.addObject("mailModel", mailModel);
 		mv.addObject("msg", "hellow World!");
 		mv.setViewName("mail/input");
@@ -30,16 +36,24 @@ public class MailInputController {
 	@RequestMapping("/confirm")
 	public ModelAndView confirm(@ModelAttribute MailInputForm form, ModelAndView mv){
 		MailModel mailModel = mailInputHelper.mailModelMapper(form);
-		mv.addObject("mailModel", mailModel);
+		// FIXME そのうち入力チェック実装する
 		mv.setViewName("mail/confirm");
+		mv.addObject("mailModel", mailModel);
+
 		return mv;
 	}
 
 	@PostMapping("/complete")
 	public ModelAndView complete(@ModelAttribute MailInputForm form, ModelAndView mv){
+	  // FIXME 確認画面からPOSTされてきた値をそのまま使ってるのでよくない。
+	  // MailInputFormをセッションに格納するなど、リクエストの内容をそのまま使わないようにしたい
 		MailModel mailModel = mailInputHelper.mailModelMapper(form);
 		mv.addObject("mailModel", mailModel);
-		mv.setViewName("redirect:/mail/complete_view");
+		if(mailSenderService.sendMail(mailModel)) {
+		  mv.setViewName("redirect:/mail/complete_view");
+    } else {
+      mv.setViewName("mail/input");
+    }
 		return mv;
 	}
 

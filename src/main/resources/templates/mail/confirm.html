@@ -30,6 +30,11 @@
 		</div>
 		<div>
 			<form method="post" action="/mail/complete" th:object="${mailModel}">
+				<input type="hidden" th:field="*{fromAd}"/>
+				<input type="hidden" th:field="*{toAd}"/>
+				<input type="hidden" th:field="*{ccAd}"/>
+				<input type="hidden" th:field="*{title}"/>
+				<input type="hidden" th:field="*{content}"/>
 				<input type="submit" value="確認した内容でメールを送信する" />
 			</form>
 			<form method="post" action="/mail/input" th:object="${mailModel}">
