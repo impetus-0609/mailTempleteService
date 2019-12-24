@@ -3,6 +3,40 @@
 	<head>
 		<title>入力画面</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style>
+	.container{
+        display: flex;
+        justify-content: center;
+    }
+    .mb20 {
+        margin-bottom: 20px;
+    }
+    
+    input[type="text"] {
+        padding: 5px;
+    }
+    .tate {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      // 中央寄せ
+      justify-content: center;
+      align-items: center;
+    }
+ul {
+    list-style-type: none;
+    margin: 0 0 0 5px;
+    padding: 0;
+}
+ 
+ul li {
+    border: 1px solid #aaa;
+    margin: 5px;
+    padding: 8px;
+}
+    
+
+  	</style>
 	</head>
 	<body>
 		<form method="post" action="/mail/confirm" th:object="${mailModel}">
@@ -13,7 +47,18 @@
 						th:text="${templete.getText()}">未着手</option>
                 </select>
 			</div>-->
-			<div>
+			<ul class="demo1 mb20">
+			  <li><a>aaa</a></li>
+			  <li><a>bbb</a></li>
+			  <li><a>ccc</a></li>
+			</ul>
+			<div class="tate">
+			  <div class="mb20"><input type="text" th:field="*{fromAd}"></div>
+			  <div class="mb20"><input type="text" th:field="*{fromAd}"></div>
+			  <div class="mb20"><input type="text" th:field="*{fromAd}"></div>
+			  <div class="mb20"><input type="text" th:field="*{fromAd}"></div>
+			  <input type="submit" value="送信内容の確認" />
+			  <!--
 				<table>
 					<tr>
 						<td><p>From</p></td>
@@ -40,10 +85,14 @@
 						<td><input type="text" th:field="*{content}"></input></td>
 					</tr>
 				</table>
-			</div>
+				-->
+			
 			<div>
-				<input type="submit" value="送信内容の確認" />
+				
 			</div>
 		</form>
 	</body>
 </html>
+
+
+
