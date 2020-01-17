@@ -11,7 +11,7 @@
     .mb20 {
         margin-bottom: 20px;
     }
-    
+
     input[type="text"] {
         padding: 5px;
     }
@@ -28,13 +28,13 @@ ul {
     margin: 0 0 0 5px;
     padding: 0;
 }
- 
+
 ul li {
     border: 1px solid #aaa;
     margin: 5px;
     padding: 8px;
 }
-    
+
 
   	</style>
 	</head>
@@ -54,9 +54,10 @@ ul li {
 			</ul>
 			<div class="tate">
 			  <div class="mb20"><input type="text" th:field="*{fromAd}"></div>
-			  <div class="mb20"><input type="text" th:field="*{fromAd}"></div>
-			  <div class="mb20"><input type="text" th:field="*{fromAd}"></div>
-			  <div class="mb20"><input type="text" th:field="*{fromAd}"></div>
+			  <div class="mb20"><input type="text" th:field="*{toAd}"></div>
+			  <div class="mb20"><input type="text" th:field="*{ccAd}"></div>
+			  <div class="mb20"><input type="text" th:field="*{title}"></div>
+			  <div class="mb20"><input type="text" th:field="*{content}"></div>
 			  <input type="submit" value="送信内容の確認" />
 			  <!--
 				<table>
@@ -86,9 +87,6 @@ ul li {
 					</tr>
 				</table>
 				-->
-			
-			<div>
-				
 			</div>
 		</form>
 	</body>

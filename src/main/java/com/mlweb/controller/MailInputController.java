@@ -1,6 +1,7 @@
 package com.mlweb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +23,9 @@ public class MailInputController {
   @Autowired
   MailSenderService mailSenderService;
 
+  @Autowired
+  private StringRedisTemplate redisTemplate;
+
   @RequestMapping("/input")
   public ModelAndView input(MailInputForm form, ModelAndView mv) {
     MailModel mailModel = mailInputHelper.mailModelMapper(form);
@@ -36,7 +40,8 @@ public class MailInputController {
   @RequestMapping("/confirm")
   public ModelAndView confirm(@ModelAttribute MailInputForm form, ModelAndView mv){
     MailModel mailModel = mailInputHelper.mailModelMapper(form);
-    // FIXME そのうち入力チェック実装する
+
+    redisTemplate.opsForValue().set("testKey", mailModel.getFromAd());
     mv.setViewName("mail/confirm");
     mv.addObject("mailModel", mailModel);
 
@@ -48,10 +53,18 @@ public class MailInputController {
     // FIXME 確認画面からPOSTされてきた値をそのまま使ってるのでよくない。
     // MailInputFormをセッションに格納するなど、リクエストの内容をそのまま使わないようにしたい
     MailModel mailModel = mailInputHelper.mailModelMapper(form);
-    mv.addObject("mailModel", mailModel);
+
+    if(!mailInputHelper.identifyAddress(
+        mailModel.getFromAd(),
+        redisTemplate.opsForValue().get("testKey"))) {
+      mv.addObject("mailModel", mailModel);
+      mv.setViewName("mail/input");
+      return mv;
+    }
     if(mailSenderService.sendMail(mailModel)) {
       mv.setViewName("redirect:/mail/complete_view");
     } else {
+      mv.addObject("mailModel", mailModel);
       mv.setViewName("mail/input");
     }
     return mv;
