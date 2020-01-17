@@ -31,4 +31,14 @@ public class MailInputHelper {
         .content(form.getContent())
         .build();
   }
+
+  public boolean identifyAddress(String checkAd , String sAd) {
+    if (Objects.isNull(checkAd) || Objects.isNull(sAd)) {
+      return false;
+    }
+    if (sAd.equals(checkAd)) {
+      return true;
+    }
+    return false;
+  }
 }
