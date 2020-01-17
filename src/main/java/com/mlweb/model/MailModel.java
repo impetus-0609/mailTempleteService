@@ -24,4 +24,6 @@ public class MailModel {
   private String content;
 
   Properties props;
+
+  private String hash;
 }
