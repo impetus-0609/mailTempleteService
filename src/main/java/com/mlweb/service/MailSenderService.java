@@ -1,5 +1,7 @@
 package com.mlweb.service;
 
+import java.security.MessageDigest;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Properties;
 
@@ -76,6 +78,31 @@ public class MailSenderService {
     sendProps.put("mail.smtp.auth", "true");
     sendProps.put("mail.debug", "true");
     return sendProps;
+  }
+
+  /***/
+  public String generateHash() {
+
+    LocalDateTime ldt = LocalDateTime.now();
+    ldt.toString();
+    // FIXME uidは将来的にはDB値で。
+    String r = null;
+    byte[] cipher_byte;
+    try{
+      MessageDigest md = MessageDigest.getInstance("SHA-256");
+      String uid = "仮ID";
+      String s = ldt + uid;
+      md.update(s.getBytes());
+      cipher_byte = md.digest();
+      StringBuilder sb = new StringBuilder(2 * cipher_byte.length);
+      for(byte b: cipher_byte) {
+        sb.append(String.format("%02x", b&0xff) );
+      }
+      r = sb.toString();
+    } catch (Exception e) {
+      System.out.println("ハッシュ値の作成に失敗した。");
+    }
+    return r;
   }
 
 }

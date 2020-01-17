@@ -1,5 +1,7 @@
 package com.mlweb.controller;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,7 @@ public class MailInputController {
   MailSenderService mailSenderService;
 
   @Autowired
-  private StringRedisTemplate redisTemplate;
+  StringRedisTemplate redisTemplate;
 
   @RequestMapping("/input")
   public ModelAndView input(MailInputForm form, ModelAndView mv) {
@@ -32,7 +34,6 @@ public class MailInputController {
     // FIXME そのうち入力チェック実装する
     // FIXME FROMアドレスはリクエストから取得してはいけない。
     mv.addObject("mailModel", mailModel);
-    mv.addObject("msg", "hellow World!");
     mv.setViewName("mail/input");
     return mv;
   }
@@ -40,32 +41,20 @@ public class MailInputController {
   @RequestMapping("/confirm")
   public ModelAndView confirm(@ModelAttribute MailInputForm form, ModelAndView mv){
     MailModel mailModel = mailInputHelper.mailModelMapper(form);
-
-    redisTemplate.opsForValue().set("testKey", mailModel.getFromAd());
+    mailModel.setHash(mailInputHelper.registerMailModel(mailModel));
     mv.setViewName("mail/confirm");
     mv.addObject("mailModel", mailModel);
-
     return mv;
   }
 
   @PostMapping("/complete")
   public ModelAndView complete(@ModelAttribute MailInputForm form, ModelAndView mv){
-    // FIXME 確認画面からPOSTされてきた値をそのまま使ってるのでよくない。
-    // MailInputFormをセッションに格納するなど、リクエストの内容をそのまま使わないようにしたい
-    MailModel mailModel = mailInputHelper.mailModelMapper(form);
-
-    if(!mailInputHelper.identifyAddress(
-        mailModel.getFromAd(),
-        redisTemplate.opsForValue().get("testKey"))) {
-      mv.addObject("mailModel", mailModel);
-      mv.setViewName("mail/input");
-      return mv;
-    }
-    if(mailSenderService.sendMail(mailModel)) {
+    MailModel mailModel = mailInputHelper
+        .convertJsonToMailModel(redisTemplate.opsForValue().get(form.getHash()));
+    if(Objects.nonNull(mailModel) && mailSenderService.sendMail(mailModel)) {
       mv.setViewName("redirect:/mail/complete_view");
     } else {
-      mv.addObject("mailModel", mailModel);
-      mv.setViewName("mail/input");
+      mv.setViewName("redirect:/mail/input");
     }
     return mv;
   }

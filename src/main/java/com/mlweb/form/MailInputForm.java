@@ -19,4 +19,6 @@ public class MailInputForm {
 
   private String content;
 
+  private String hash;
+
 }
