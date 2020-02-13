@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>サンプル画面</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<table>
+			<tr>
+				<th>てきすと</th>
+				<th>ひづけ</th>
+			</tr>
+			<tr th:each="sample : ${samples}">
+				<td th:text="${sample.text}"></td>
+				<td th:text="${sample.entryDate}"></td>
+			</tr>
+		</table>
+	</body>
+</html>
