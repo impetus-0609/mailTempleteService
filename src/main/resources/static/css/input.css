@@ -1,0 +1,48 @@
+    .container{
+        display: flex;
+        justify-content: center;
+    }
+    .mb20 {
+        margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+        padding: 5px;
+    }
+    .tate {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      // 中央寄せ
+      justify-content: center;
+      align-items: center;
+    }
+ul {
+    list-style-type: none;
+    margin: 0 0 0 5px;
+    padding: 0;
+}
+
+ul li {
+    border: 1px solid #aaa;
+    margin: 5px;
+    padding: 8px;
+}
+	.modal {
+	position: fixed;
+	index: 1;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.5);
+	display:none;
+	}
+
+	.modal-content{
+	background-color: white;
+	width: 500px;
+	height: 500px;
+	margin: 40% auto;
+	}

@@ -1,9 +1,9 @@
-var btn = document.getElementById('btn');
+var btn = document.getElementById('add1');
 var modal = document.getElementById('modal');
 
 btn.addEventListener('click', function() {
   modal.style.display = 'block';
-}
+})
 
 var closeBtn = document.getElementById('closeBtn');
 

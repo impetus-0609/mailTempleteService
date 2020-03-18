@@ -4,69 +4,9 @@
 <head>
 	<title>新規メッセージ</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-	<style>
-	.container{
-        display: flex;
-        justify-content: center;
-    }
-    .mb20 {
-        margin-bottom: 20px;
-    }
-
-    input[type="text"] {
-        padding: 5px;
-    }
-    .tate {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      // 中央寄せ
-      justify-content: center;
-      align-items: center;
-    }
-ul {
-    list-style-type: none;
-    margin: 0 0 0 5px;
-    padding: 0;
-}
-
-ul li {
-    border: 1px solid #aaa;
-    margin: 5px;
-    padding: 8px;
-}
-
-	<body>
-		<form method="post" action="/mail/confirm" th:object="${mailModel}">
-			<!--<div>
-				<select th:field="*{templeteCd}">
-					<option th:each="templete : ${T(com.mlweb.data.MailTemplate)}"
-						th:value="${templete.getValue()}"
-						th:text="${templete.getText()}">未着手</option>
-                </select>
-			</div>-->
-	.modal {
-
-	position: fixed;
-	index: 1;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	overflow: auto;
-	background-color: rgba(0,0,0,0.5);
-	}
-
-	.modal-content{
-	background-color: white;
-	width: 500px;
-	height: 500px;
-	margin: 40% auto;
-	}
-
-	</style>
+	<link href="/css/input.css" th:href="@{/css/input.css}" rel="stylesheet"></link>
 </head>
+
 <body>
 	<form action="" method="post" >
 	<div class="tate" >
@@ -79,19 +19,19 @@ ul li {
 			</select>
 		</p>
 			<p>To：<br>
-			<input type="text" name="name2" style="width:400px;"> <input type="button" value="追加" id="add1"> <input type="button" value="取消" id="remove1"></p>
+			<input type="text" th:field="${mailModel.toAd}" style="width:400px;"> <input type="button" value="追加" id="add1"> <input type="button" value="取消" id="remove1"></p>
 			<p>Cc：<br>
-			<input type="text" name="name3" style="width:400px;"> <input type="button" value="追加" id="add2"> <input type="button" value="取消" id="remove2"></p>
+			<input type="text" th:field="${mailModel.ccAd}" style="width:400px;"> <input type="button" value="追加" id="add2"> <input type="button" value="取消" id="remove2"></p>
 			<p>Bcc：<br>
 			<input type="text" name="name4" style="width:400px;"> <input type="button" value="追加" id="add3"> <input type="button" value="取消" id="remove3"></p>
 			<p>件名：<br>
-			<input type="text" name="name5" style="width:500px; height: 48px; "></p>
-		
-			<div class="mb20"><p>本文：<br><input type="text" th:field="${mailModel.fromAd}" style="width:500px; height:300px;"></div> <input type="submit" value ="送信"/>
+			<input type="text" th:field="${mailModel.title}" style="width:500px; height: 48px; "></p>
+
+			<div class="mb20"><p>本文：<br><input type="text" th:field="${mailModel.content}" style="width:500px; height:300px;"></div> <input type="submit" value ="送信"/>
 		</div>
 	</form>
-	<!--  
-	<div id="modal" class="modal">
+
+	<div id="modal" class="modal" >
 		<div class="modal-content">
 			<div class="modal-body">
 				<h1>全社員メールアドレス</h1>
@@ -119,6 +59,6 @@ ul li {
 			<input type="button" id="closeBtn" value="close">
 		</div>
 	</div>
-	-->
+	<script src="/js/input.js" th:src="@{/js/input.js}"></script>
 </body>
 </html>
