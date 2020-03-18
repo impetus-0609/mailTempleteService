@@ -1,9 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>入力画面</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<head>
+	<title>新規メッセージ</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 	<style>
+<<<<<<< HEAD
 	.container{
         display: flex;
         justify-content: center;
@@ -35,7 +38,10 @@ ul li {
     padding: 8px;
 }
 
+=======
+>>>>>>> branch 'feature_#3' of https://github.com/impetus-0609/mailTempleteService.git
 
+<<<<<<< HEAD
   	</style>
 	</head>
 	<body>
@@ -88,9 +94,87 @@ ul li {
 				</table>
 				-->
 			</div>
+=======
+	.modal {
+
+	position: fixed;
+	index: 1;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.5);
+	}
+
+	.modal-content{
+	background-color: white;
+	width: 500px;
+	height: 500px;
+	margin: 40% auto;
+	}
+
+	</style>
+</head>
+<body>
+	<form action="" method="post" >
+		<p>テンプレート：<br>
+			<select style="width:500px;">
+			<option value="">選択してください</option>
+			<option value="">勤怠連絡　休暇</option>
+			<option value="">勤怠連絡　遅刻</option>
+			<option value="">業務報告　日報</option>
+			</select>
+		</p>
+>>>>>>> branch 'feature_#3' of https://github.com/impetus-0609/mailTempleteService.git
 		</form>
-	</body>
+		<form action="a" method="post">
+			<p>To：<br>
+			<input type="text" name="name2" style="width:400px;"> <input type="button" value="追加" id="add1"> <input type="button" value="取消" id="remove1"></p>
+		</form>
+		<form action="b" method="post">
+			<p>Cc：<br>
+			<input type="text" name="name3" style="width:400px;"> <input type="button" value="追加" id="add2"> <input type="button" value="取消" id="remove2"></p>
+		</form>
+		<form action="c" method="post">
+			<p>Bcc：<br>
+			<input type="text" name="name4" style="width:400px;"> <input type="button" value="追加" id="add3"> <input type="button" value="取消" id="remove3"></p>
+		</form>
+		<form action="d" method="post">
+			<p>件名：<br>
+			<input type="text" name="name5" style="width:500px; height: 48px; "></p>
+		</form>
+		<div class="tate" >
+			<div class="mb20"><p>本文：<br><input type="text" th:field="*{fromAd}" style="width:500px; height:300px;"></div> <input type="submit" value ="送信"/>
+		</div>
+	</form>
+	<div id="modal" class="modal">
+		<div class="modal-content">
+			<div class="modal-body">
+				<h1>全社員メールアドレス</h1>
+				<select style="width:30%;">
+				<option value="">Unit</option>
+				<option value="">マネージャー1</option>
+				<option value="">マネージャー2</option>
+				<option value="">マネージャー3</option>
+				</select>
+
+				<select style="width:30%;">
+				<option value="">Team</option>
+				<option value="">インピタス1</option>
+				<option value="">インピタス2</option>
+				<option value="">インピタス3</option>
+				</select>
+
+				<select style="width:30%;">
+				<option value="">Name</option>
+				<option value="">あああ1</option>
+				<option value="">あああ2</option>
+				<option value="">あああ3</option>
+				</select>
+			</div>
+			<input type="button" id="closeBtn" value="close">
+		</div>
+	</div>
+</body>
 </html>
-
-
-
