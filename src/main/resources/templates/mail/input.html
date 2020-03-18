@@ -8,8 +8,10 @@
 </head>
 
 <body>
-	<form action="" method="post" >
-	<div class="tate" >
+<form action="" method="post" >
+<div class="container">
+	<div class="container-position" >
+    	<img th:src="@{/img/logo.png}">
 		<p>テンプレート：<br>
 			<select style="width:500px;">
 			<option value="">選択してください</option>
@@ -18,18 +20,20 @@
 			<option value="">業務報告　日報</option>
 			</select>
 		</p>
-			<p>To：<br>
-			<input type="text" th:field="${mailModel.toAd}" style="width:400px;"> <input type="button" value="追加" id="add1"> <input type="button" value="取消" id="remove1"></p>
-			<p>Cc：<br>
-			<input type="text" th:field="${mailModel.ccAd}" style="width:400px;"> <input type="button" value="追加" id="add2"> <input type="button" value="取消" id="remove2"></p>
-			<p>Bcc：<br>
-			<input type="text" name="name4" style="width:400px;"> <input type="button" value="追加" id="add3"> <input type="button" value="取消" id="remove3"></p>
-			<p>件名：<br>
-			<input type="text" th:field="${mailModel.title}" style="width:500px; height: 48px; "></p>
+		<p>To：<br>
+		<input type="text" th:field="${mailModel.toAd}" style="width:400px;"> <input type="button" value="追加" id="add1"> <input type="button" value="取消" id="remove1"></p>
+		<p>Cc：<br>
+		<input type="text" th:field="${mailModel.ccAd}" style="width:400px;"> <input type="button" value="追加" id="add2"> <input type="button" value="取消" id="remove2"></p>
+		<p>Bcc：<br>
+		<input type="text" name="name4" style="width:400px;"> <input type="button" value="追加" id="add3"> <input type="button" value="取消" id="remove3"></p>
+		<p>件名：<br>
+		<input type="text" th:field="${mailModel.title}" style="width:500px; height: 48px; "></p>
 
-			<div class="mb20"><p>本文：<br><input type="text" th:field="${mailModel.content}" style="width:500px; height:300px;"></div> <input type="submit" value ="送信"/>
-		</div>
-	</form>
+		<p>本文：<br><input type="text" th:field="${mailModel.content}" style="width:500px;"></p>
+		<input type="submit" class="sendBtn" value ="送信"/>
+	</div>
+</div>
+</form>
 
 	<div id="modal" class="modal" >
 		<div class="modal-content">
