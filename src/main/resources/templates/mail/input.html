@@ -36,7 +36,18 @@ ul li {
     margin: 5px;
     padding: 8px;
 }
+
+	<body>
+		<form method="post" action="/mail/confirm" th:object="${mailModel}">
+			<!--<div>
+				<select th:field="*{templeteCd}">
+					<option th:each="templete : ${T(com.mlweb.data.MailTemplate)}"
+						th:value="${templete.getValue()}"
+						th:text="${templete.getText()}">未着手</option>
+                </select>
+			</div>-->
 	.modal {
+
 	position: fixed;
 	index: 1;
 	left: 0;
@@ -75,12 +86,11 @@ ul li {
 			<input type="text" name="name4" style="width:400px;"> <input type="button" value="追加" id="add3"> <input type="button" value="取消" id="remove3"></p>
 			<p>件名：<br>
 			<input type="text" name="name5" style="width:500px; height: 48px; "></p>
-
 		
-			<div class="mb20"><p>本文：<br><input type="text"  style="width:500px; height:300px;"></div> <input type="submit" value ="送信"/>
+			<div class="mb20"><p>本文：<br><input type="text" th:field="${mailModel.fromAd}" style="width:500px; height:300px;"></div> <input type="submit" value ="送信"/>
 		</div>
 	</form>
-	<!-- 
+	<!--  
 	<div id="modal" class="modal">
 		<div class="modal-content">
 			<div class="modal-body">
@@ -109,6 +119,6 @@ ul li {
 			<input type="button" id="closeBtn" value="close">
 		</div>
 	</div>
-	 -->
+	-->
 </body>
 </html>
